@@ -1,3 +1,10 @@
+"""
+Voice Generator
+~~~~~~~~~~~~~~~~~~~
+
+文字列から音声を生成します。
+
+"""
 ##import subprocess
 import re
 

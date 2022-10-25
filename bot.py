@@ -10,7 +10,7 @@ import discord
 from discord.ext import commands
 
 from voice_generator import creat_sound
-from command import set
+import command_list
 
 # 自分のBotのアクセストークン
 TOKEN = os.environ['TOKEN']
@@ -18,6 +18,9 @@ TOKEN = os.environ['TOKEN']
 # 接続に必要なオブジェクトを生成
 client = commands.Bot(command_prefix='>')
 client.remove_command("help")
+
+# Botの起動とDiscordサーバーへの接続
+client.run(TOKEN)
 
 # 作業ディレクトリをbot.pyが置いてあるディレクトリに変更
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -30,7 +33,7 @@ user_dic = []
 async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
     print('ログインしました')
-    set(client)
+    command_list.setInfo(client)
     activity = discord.Activity(name='>help', type=discord.ActivityType.playing)
     await client.change_presence(activity=activity)
 
@@ -48,22 +51,21 @@ async def on_message(message):
     else:
         if message.guild.voice_client:
             inputText = ''
-            if flg.readname_flg :
-                user = client.get_user(message.author.id).display_name + ' '
-                inputText = user
+
+            #ユーザー名
+            user = client.get_user(message.author.id).display_name + ' '
+            inputText = user
             inputText = inputText + message.clean_content
-            if not flg.readmention_flg :
-                pattern = "<@/!.*>"
-                inputText = re.sub(pattern,'',inputText)
-                pattern = "@.* "
-                inputText = re.sub(pattern,'',inputText)
+
+            #メンション
+            pattern = "<@/!.*>"
+            inputText = re.sub(pattern,'',inputText)
+            pattern = "@.* "
+            inputText = re.sub(pattern,'',inputText)
+
             #print(inputText)
             creat_sound(inputText)
             source = discord.FFmpegPCMAudio("output.mp3",options="-af atempo=1.5")
             message.guild.voice_client.play(source)
         else:
             pass
-
-
-# Botの起動とDiscordサーバーへの接続
-client.run(TOKEN)

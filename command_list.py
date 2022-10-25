@@ -1,3 +1,10 @@
+"""
+Command List
+~~~~~~~~~~~~~~~~~~~
+
+投げられるコマンドをまとめます。
+
+"""
 # インストールした discord.py を読み込む
 import asyncio
 import os
@@ -11,7 +18,7 @@ from discord.ext import commands
 
 client = None
 
-def set(clientObj):
+def setInfo(clientObj):
     global client
     client = clientObj
 
