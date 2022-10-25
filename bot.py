@@ -16,7 +16,7 @@ from voice_generator import creat_sound
 TOKEN = os.environ['TOKEN']
 
 # 接続に必要なオブジェクトを生成
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
@@ -79,16 +79,13 @@ async def on_message(message):
 # >join
 @client.command()
 async def join(message):
-    print('#voicechannelを取得')
     vc = message.author.voice.channel
-    print('#voicechannelに接続')
     await vc.connect()
     await message.channel.send('にゃーん！(接続しました)')
 
 # >bye
 @client.command()
 async def bye(message):
-    print('#切断')
     await message.voice_client.disconnect()
     await message.channel.send('にゃーん...(切断しました)')
 
