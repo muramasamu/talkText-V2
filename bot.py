@@ -14,13 +14,13 @@ from voice_generator import creat_sound
 TOKEN = os.environ['TOKEN']
 
 # 接続に必要なオブジェクトを生成
-#intents = discord.Intents.all()
+intents = discord.Intents.all()
 #intents.message_content = True
 
 #client = discord.Client(intents=intents)
 
-client = commands.Bot(command_prefix='>')
-#client.remove_command("help")
+client = commands.Bot(command_prefix='>',intents=intents)
+client.remove_command("help")
 
 #command_list(client)
 
