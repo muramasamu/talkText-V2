@@ -16,8 +16,13 @@ from voice_generator import creat_sound
 TOKEN = os.environ['TOKEN']
 
 # 接続に必要なオブジェクトを生成
-client = commands.Bot(command_prefix='>')
-client.remove_command("help")
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
+
+#client = commands.Bot(command_prefix='>')
+#client.remove_command("help")
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
