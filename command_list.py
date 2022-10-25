@@ -5,22 +5,17 @@ Command List
 投げられるコマンドをまとめます。
 
 """
-# インストールした discord.py を読み込む
-import asyncio
-import os
-import subprocess
-import re
 
 from threading import Thread
 
 import discord
 from discord.ext import commands
 
+
 client = None
 
-def setInfo(clientObj):
-    global client
-    client = clientObj
+def __init__(self, client):
+    self.client = client
 
 # >join
 @client.command()

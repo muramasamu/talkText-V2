@@ -21,6 +21,7 @@ client.remove_command("help")
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
+command_list(client)
 
 # 作業ディレクトリをbot.pyが置いてあるディレクトリに変更
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -33,7 +34,6 @@ user_dic = []
 async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
     print('ログインしました')
-    command_list.setInfo(client)
     activity = discord.Activity(name='>help', type=discord.ActivityType.playing)
     await client.change_presence(activity=activity)
 
@@ -68,4 +68,34 @@ async def on_message(message):
             source = discord.FFmpegPCMAudio("output.mp3",options="-af atempo=1.5")
             message.guild.voice_client.play(source)
         else:
+            #ボイチャにこのbotが参加してなければ処理を飛ばす。
             pass
+
+# >join
+@client.command()
+async def join(message):
+    print('#voicechannelを取得')
+    vc = message.author.voice.channel
+    print('#voicechannelに接続')
+    await vc.connect()
+    await message.channel.send('にゃーん！(接続しました)')
+
+# >bye
+@client.command()
+async def bye(message):
+    print('#切断')
+    await message.voice_client.disconnect()
+    await message.channel.send('にゃーん...(切断しました)')
+
+# >help
+@client.command()
+async def help(message):
+    helpFile = open('./text/help.txt', 'r', encoding='UTF-8')
+    helpText = helpFile.read()
+    await message.channel.send(helpText)
+    helpFile.close()
+
+# >neko
+@client.command()
+async def neko(message):
+    await message.channel.send('にゃーん')
