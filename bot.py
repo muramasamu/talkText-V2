@@ -10,7 +10,7 @@ import discord
 from discord.ext import commands
 
 from voice_generator import creat_sound
-import command_list
+#import command_list
 
 # 自分のBotのアクセストークン
 TOKEN = os.environ['TOKEN']
@@ -21,7 +21,7 @@ client.remove_command("help")
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
-command_list(client)
+#command_list(client)
 
 # 作業ディレクトリをbot.pyが置いてあるディレクトリに変更
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
