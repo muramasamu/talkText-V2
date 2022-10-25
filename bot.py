@@ -4,8 +4,6 @@ import os
 import subprocess
 import re
 
-from threading import Thread
-
 import discord
 from discord.ext import commands
 
@@ -24,8 +22,6 @@ client = discord.Client(intents=intents)
 #client = commands.Bot(command_prefix='>')
 #client.remove_command("help")
 
-# Botの起動とDiscordサーバーへの接続
-client.run(TOKEN)
 #command_list(client)
 
 # 作業ディレクトリをbot.pyが置いてあるディレクトリに変更
@@ -101,3 +97,6 @@ async def help(message):
 @client.command()
 async def neko(message):
     await message.channel.send('にゃーん')
+
+# Botの起動とDiscordサーバーへの接続
+client.run(TOKEN)
