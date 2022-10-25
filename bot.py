@@ -88,7 +88,7 @@ async def bye(message):
 # >help
 @client.command()
 async def help(message):
-    helpFile = open('./text/help.txt', 'r', encoding='UTF-8')
+    helpFile = open('./conf/help.txt', 'r', encoding='UTF-8')
     helpText = helpFile.read()
     await message.channel.send(helpText)
     helpFile.close()
