@@ -1,12 +1,15 @@
 # インストールした discord.py を読み込む
 import os
 import re
+from logging import getLogger
 
 import discord
 from discord.ext import commands
 
 from voice_generator import creat_sound
 #import command_list
+
+logger = getLogger()
 
 # 自分のBotのアクセストークン
 TOKEN = os.environ['TOKEN']
@@ -40,7 +43,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     #print('message.author:'+message.author)
-    print('message.author.id:'+message.author.id)
+    logger.debug('message.author.id:'+message.author.id)
     # メッセージ送信者がBotだった場合は無視する
     if message.author.bot:
         return
