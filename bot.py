@@ -1,7 +1,5 @@
 # インストールした discord.py を読み込む
-import asyncio
 import os
-import subprocess
 import re
 
 import discord
@@ -19,7 +17,7 @@ intents.message_content = True
 
 #client = discord.Client(intents=intents)
 
-client = commands.Bot(command_prefix='>',intents=intents)
+client = commands.Bot(command_prefix='$',intents=intents)
 client.remove_command("help")
 
 #command_list(client)
@@ -35,18 +33,20 @@ user_dic = []
 async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
     print('ログインしました')
-    activity = discord.Activity(name='>help', type=discord.ActivityType.playing)
+    activity = discord.Activity(name='$help', type=discord.ActivityType.playing)
     await client.change_presence(activity=activity)
 
 # メッセージ受信時に動作する処理
 @client.event
 async def on_message(message):
+    #print('message.author:'+message.author)
+    print('message.author.id:'+message.author.id)
     # メッセージ送信者がBotだった場合は無視する
     if message.author.bot:
         return
 
     # >始まりはコマンドとして処理。
-    if message.content.startswith('>'):
+    if message.content.startswith('$'):
         await client.process_commands(message)
 
     else:
@@ -72,20 +72,20 @@ async def on_message(message):
             #ボイチャにこのbotが参加してなければ処理を飛ばす。
             pass
 
-# >join
+# join
 @client.command()
 async def join(message):
     vc = message.author.voice.channel
     await vc.connect()
     await message.channel.send('にゃーん！(接続しました)')
 
-# >bye
+# bye
 @client.command()
 async def bye(message):
     await message.voice_client.disconnect()
     await message.channel.send('にゃーん...(切断しました)')
 
-# >help
+# help
 @client.command()
 async def help(message):
     helpFile = open('./conf/help.txt', 'r', encoding='UTF-8')
@@ -93,7 +93,7 @@ async def help(message):
     await message.channel.send(helpText)
     helpFile.close()
 
-# >neko
+# neko
 @client.command()
 async def neko(message):
     await message.channel.send('にゃーん')
