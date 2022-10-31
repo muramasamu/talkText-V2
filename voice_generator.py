@@ -7,6 +7,7 @@ Voice Generator
 """
 ##import subprocess
 import re
+import io
 
 from gtts import gTTS
 
@@ -54,9 +55,17 @@ def creat_sound(inputText):
     inputText = urlAbb(inputText)   # URLなら省略
     inputText = blackListWord(inputText)   # 禁止単語を省略
     inputText = remove_command(inputText)   # コマンドを省略
-    inputText = user_custam(inputText)   # コマンドを省略
+    #inputText = user_custam(inputText)   # コマンドを省略
 
+    # buffer = io.BytesIO()
+
+    # tts = gTTS(text=inputText, lang='ja')
+    # #tts.save('./output.mp3')
+    # tts.write_to_fp(buffer)
+    # buffer.seek(0)
+
+    # return buffer
+
+    print(inputText)
     tts = gTTS(text=inputText, lang='ja')
     tts.save('./output.mp3')
-
-    return True
