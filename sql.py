@@ -31,7 +31,8 @@ def selectAll(sql):
 
 def selectOne(sql):
     connection = _con_open()
-    cursor = connection.cursor(MySQLdb.cursors.DictCursor)
+    #cursor = connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor = connection.cursor(dictionary=True)
 
     # execute
     cursor.execute(sql)
