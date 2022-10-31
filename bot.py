@@ -5,6 +5,7 @@ from logging import getLogger
 
 import discord
 from discord.ext import commands
+import ffmpeg
 
 from voice_generator import creat_sound
 import conf
