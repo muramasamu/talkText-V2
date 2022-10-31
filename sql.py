@@ -1,6 +1,6 @@
 import os
 
-import MySQLdb
+import mysql.connector as MySQLdb
 
 def _con_open():
     # connection create
