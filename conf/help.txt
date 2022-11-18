@@ -5,6 +5,7 @@ $join 発言者が接続しているボイスチャンネルに接続します�
 $bye  ボイスチャンネルから切断します。
 $help ヘルプを表示します(現在表示中)
 $neko にゃーん
-$readname (on or off) 名前の読み上げをするかしないか
-$readmention (on or off) メンションの読み上げをするかしないか
+# 以下は廃止しました。
+# $readname (on or off) 名前の読み上げをするかしないか
+# $readmention (on or off) メンションの読み上げをするかしないか
 ```
