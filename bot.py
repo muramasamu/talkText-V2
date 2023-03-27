@@ -64,12 +64,13 @@ async def on_message(message):
 # voice状況が更新されたら入る
 @client.event
 async def on_voice_state_update(member, before, after):
-    if not member.bot and before.channel == None and after.channel != None : #and member.guild.voice_client
-        text = member.display_name+'が'+after.channel.name+'に接続しました。'
-        creat_sound(text)
-        source = discord.FFmpegPCMAudio("output.mp3",options="-af atempo=1.5")
-        member.guild.voice_client.play(source)
-        print(text)
+    if member.guild.voice_client != None:
+        if not member.bot and before.channel == None and after.channel != None :
+            text = member.display_name+'が'+after.channel.name+'に接続しました。'
+            creat_sound(text)
+            source = discord.FFmpegPCMAudio("output.mp3",options="-af atempo=1.5")
+            member.guild.voice_client.play(source)
+            print(text)
 
 # join
 @client.command()
