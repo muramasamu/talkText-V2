@@ -1,6 +1,5 @@
 # インストールした discord.py を読み込む
 import os
-import re
 from logging import getLogger
 
 import discord
@@ -12,7 +11,6 @@ logger = getLogger()
 
 # 自分のBotのアクセストークン
 TOKEN = os.environ['TOKEN']
-print(TOKEN)
 
 # 接続に必要なオブジェクトを生成
 intents = discord.Intents.all()
@@ -75,13 +73,20 @@ async def on_voice_state_update(member, before, after):
 # join
 @client.command()
 async def join(message):
-    vc = message.author.voice.channel
-    await vc.connect()
+    if message.author.voice is None:
+        await message.channel.send("にゃーん！(あなたはボイスチャンネルに接続していません。)")
+        return
+
+    await message.author.voice.channel.connect()
     await message.channel.send('にゃーん！(接続しました)')
 
 # bye
 @client.command()
 async def bye(message):
+    if message.guild.voice_client is None:
+        await message.channel.send("にゃーん？(接続していません。)")
+        return
+
     await message.voice_client.disconnect()
     await message.channel.send('にゃーん...(切断しました)')
 
