@@ -77,6 +77,10 @@ async def join(message):
         await message.channel.send("にゃーん！(あなたはボイスチャンネルに接続していません。)")
         return
 
+    if message.guild.voice_client is not None:
+        await message.channel.send("にゃーん！(既に接続しています。)")
+        return
+
     await message.author.voice.channel.connect()
     await message.channel.send('にゃーん！(接続しました)')
 
