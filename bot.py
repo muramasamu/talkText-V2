@@ -105,10 +105,8 @@ async def help(message):
 @client.command()
 async def stat(message):
     await message.channel.send('statコマンド実行者:'+client.get_user(message.author.id).display_name)
-
     vc_con_flg = True if message.guild.voice_client is not None else False
-    await message.channel.send('ボイチャ接続:'+str(vc_con_flg))
-
+    await message.channel.send('ボイチャ接続状況:'+str(vc_con_flg))
 
 # neko
 @client.command()
